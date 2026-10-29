@@ -9,6 +9,24 @@ function validarNome(nome) {
   return true;
 }
 
+function validarAno(safra) {
+  const anoAtual = new Date().getFullYear();
+  if (isNaN(safra) || safra < 1800 || safra > anoAtual) {
+    alert(`Ano inválido. Por favor, digite um ano entre 1800 e ${anoAtual}.`);
+    return false; //Outra sugestão do autocomplete e deu certo; dava pra fazer com 2026 e 1800 mas deixei assim já que funciona
+  }
+  return true;
+}
+
+function validarEstoque(estoque) {
+  if (isNaN(estoque) || estoque < 0) {
+    alert(
+      "Quantidade em estoque inválida. Por favor, digite um número não negativo.",
+    );
+    return false;
+  }
+  return true;
+}
 function adicionarVinho(nome, tipo, safra, estoque) {
   vinhos.push({ nome, tipo, safra, estoque });
 }
@@ -29,6 +47,9 @@ while (true) {
     continue;
   }
   let safra = prompt("Digite a safra do vinho:");
+  if (!validarAno(safra)) {
+    continue;
+  }
   let estoque = parseInt(prompt("Digite a quantidade em estoque:"));
 
   adicionarVinho(nome, tipo, safra, estoque);
@@ -41,13 +62,20 @@ while (true) {
 
 vinhos.forEach((vinho, index) => {
   console.log(`Vinho ${index + 1}:`);
-  console.log(`Nome: ${vinho.nome}`);
+  console.log(`Nome: ${vinho.nome.toUpperCase()}`);
   console.log(`Tipo: ${vinho.tipo}`);
   console.log(`Safra: ${vinho.safra}`);
-  if (vinho.estoque < estoqueMinimo) {
-    console.log("ATENÇÃO: Estoque baixo! Estoque atual: " + vinho.estoque);
-  } else {
-    console.log(`Estoque: ${vinho.estoque}`);
-  }
+  console.log(`Estoque: ${vinho.estoque}`);
   console.log("-------------------------");
 });
+// Tentativa do estoque baixo com filter
+const estoqueBaixo = vinhos.filter((vinho) => vinho.estoque < estoqueMinimo);
+
+if (estoqueBaixo.length > 0) {
+  console.log("ATENÇÃO! Vinhos com estoque baixo:");
+  estoqueBaixo.forEach((vinho) => {
+    console.log(
+      `- ${vinho.nome.toUpperCase()} (Estoque restante: ${vinho.estoque})`,
+    );
+  });
+}
