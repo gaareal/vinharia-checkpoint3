@@ -89,3 +89,6 @@ function calcularEstoqueTotal() {
 }
 
 calcularEstoqueTotal();
+
+const nomesMaiusculos = vinhos.map((vinho) => vinho.nome.toUpperCase());
+console.log("Nomes dos vinhos em maiúsculas:", nomesMaiusculos);
