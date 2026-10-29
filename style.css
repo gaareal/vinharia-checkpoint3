@@ -1,0 +1,14 @@
+body {
+  background-color: rgba(54, 12, 54, 0.975);
+  justify-content: center;
+  padding: 16px;
+  color: white;
+}
+
+h1 {
+  font-family: "Times New Roman", Times, serif;
+}
+
+p {
+  font-size: 24px;
+}

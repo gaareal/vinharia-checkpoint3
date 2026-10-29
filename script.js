@@ -1,0 +1,1 @@
+const estoqueMinimo = 5;
