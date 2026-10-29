@@ -79,3 +79,13 @@ if (estoqueBaixo.length > 0) {
     );
   });
 }
+
+function calcularEstoqueTotal() {
+  const totalEstoque = vinhos.reduce(
+    (total, vinho) => total + vinho.estoque,
+    0,
+  );
+  console.log(`Estoque total de vinhos: ${totalEstoque}`);
+}
+
+calcularEstoqueTotal();
